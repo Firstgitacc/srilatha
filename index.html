@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Sreelatha Suragani — Associate Consultant and .NET Developer with 15+ years of experience across Oil & Gas, Healthcare, and Insurance." />
+  <meta name="theme-color" content="#070b14" />
+  <title>Sreelatha Suragani | .NET Developer & Technical Lead</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+            mono: ['JetBrains Mono', 'SFMono-Regular', 'Consolas', 'monospace']
+          },
+          boxShadow: {
+            glow: '0 0 40px rgba(57, 189, 248, .14)',
+            violetGlow: '0 0 50px rgba(139, 92, 246, .15)'
+          },
+          animation: {
+            'float-slow': 'float 7s ease-in-out infinite',
+            'pulse-soft': 'pulseSoft 3s ease-in-out infinite'
+          },
+          keyframes: {
+            float: {'0%,100%': {transform:'translateY(0)'}, '50%': {transform:'translateY(-12px)'}},
+            pulseSoft: {'0%,100%': {opacity:'.45'}, '50%': {opacity:'1'}}
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root { color-scheme: dark; }
+    html { background: #070b14; }
+    body { background: radial-gradient(circle at top left, rgba(59,130,246,.08), transparent 35%), radial-gradient(circle at 85% 20%, rgba(139,92,246,.09), transparent 35%), #070b14; }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, black, transparent 92%);
+      z-index: -2;
+    }
+    #particleCanvas { position: fixed; inset: 0; z-index: -1; pointer-events:none; opacity:.5; }
+    .glass { background: rgba(11, 17, 30, .72); backdrop-filter: blur(18px); border: 1px solid rgba(148,163,184,.14); }
+    .panel { background: linear-gradient(180deg, rgba(17,24,39,.88), rgba(9,14,25,.88)); border: 1px solid rgba(148,163,184,.14); }
+    .code-tab[aria-selected="true"] { color:#e2e8f0; background:rgba(30,41,59,.85); border-color:rgba(56,189,248,.28); }
+    .fade-up { opacity:0; transform:translateY(20px); transition:opacity .7s ease, transform .7s ease; }
+    .fade-up.in-view { opacity:1; transform:none; }
+    .chip { transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease, background .2s ease; }
+    .chip:hover { transform:translateY(-3px); border-color:rgba(56,189,248,.45); box-shadow:0 12px 28px rgba(2,132,199,.12); background:rgba(14, 30, 47, .82); }
+    .magnetic { will-change: transform; transition: transform .18s ease; }
+    .timeline-line::before { content:""; position:absolute; left:17px; top:18px; bottom:-18px; width:1px; background:linear-gradient(#38bdf8, rgba(56,189,248,.08)); }
+    .timeline-line:last-child::before { display:none; }
+    .syntax-key { color:#c084fc; } .syntax-type{color:#67e8f9}.syntax-str{color:#86efac}.syntax-num{color:#fbbf24}.syntax-comment{color:#64748b}
+    .project-card { position:relative; overflow:hidden; }
+    .project-card::after { content:""; position:absolute; inset:auto -30% -55% auto; width:240px; height:240px; background:radial-gradient(circle, rgba(56,189,248,.16), transparent 68%); transition:transform .5s ease; }
+    .project-card:hover::after { transform:translate(-22px,-28px) scale(1.15); }
+    .focus-ring:focus-visible { outline:2px solid #38bdf8; outline-offset:3px; }
+    .scrollbar-hide::-webkit-scrollbar { display:none; }
+    .scrollbar-hide { scrollbar-width:none; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important; transition-duration:.01ms !important; }
+    }
+  </style>
+</head>
+<body class="text-slate-200 antialiased selection:bg-sky-400/25 selection:text-white">
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+
+  <header class="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-[#070b14]/80 backdrop-blur-xl">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8" aria-label="Primary navigation">
+      <a href="#top" class="focus-ring flex items-center gap-3 rounded-lg" aria-label="Go to top">
+        <span class="grid h-9 w-9 place-items-center rounded-xl border border-sky-400/25 bg-sky-400/10 font-mono text-sm font-bold text-sky-300">SS</span>
+        <span class="hidden sm:block"><span class="block text-sm font-semibold">Sreelatha Suragani</span><span class="block text-[11px] text-slate-500">.NET • Azure • Technical Lead</span></span>
+      </a>
+      <button id="menuBtn" class="focus-ring rounded-lg border border-white/10 p-2 text-slate-300 md:hidden" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </button>
+      <div class="hidden items-center gap-1 md:flex">
+        <a class="focus-ring rounded-lg px-3 py-2 text-sm text-slate-400 hover:text-white" href="#stack">Stack</a>
+        <a class="focus-ring rounded-lg px-3 py-2 text-sm text-slate-400 hover:text-white" href="#projects">Projects</a>
+        <a class="focus-ring rounded-lg px-3 py-2 text-sm text-slate-400 hover:text-white" href="#architecture">Architecture</a>
+        <a class="focus-ring rounded-lg px-3 py-2 text-sm text-slate-400 hover:text-white" href="#experience">Experience</a>
+        <a class="magnetic focus-ring ml-2 rounded-xl border border-sky-300/25 bg-sky-400/10 px-4 py-2 text-sm font-medium text-sky-200 hover:bg-sky-400/15" href="#contact">Connect</a>
+      </div>
+    </nav>
+    <div id="mobileNav" class="hidden border-t border-white/5 px-5 py-3 md:hidden">
+      <div class="flex flex-col gap-1">
+        <a class="rounded-lg px-3 py-2 text-sm text-slate-300" href="#stack">Stack</a>
+        <a class="rounded-lg px-3 py-2 text-sm text-slate-300" href="#projects">Projects</a>
+        <a class="rounded-lg px-3 py-2 text-sm text-slate-300" href="#architecture">Architecture</a>
+        <a class="rounded-lg px-3 py-2 text-sm text-slate-300" href="#experience">Experience</a>
+        <a class="rounded-lg px-3 py-2 text-sm text-sky-300" href="#contact">Connect</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="relative overflow-hidden pt-36 lg:pt-44">
+      <div class="mx-auto grid max-w-7xl items-center gap-12 px-5 pb-24 lg:grid-cols-[1.1fr_.9fr] lg:px-8 lg:pb-32">
+        <div class="fade-up">
+          <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/5 px-3 py-1.5 text-xs font-medium text-emerald-300">
+            <span class="h-2 w-2 animate-pulse-soft rounded-full bg-emerald-400"></span>
+            Associate Consultant • 15+ years • Enterprise .NET
+          </div>
+          <h1 class="max-w-4xl text-4xl font-semibold tracking-[-0.035em] text-white sm:text-6xl lg:text-7xl">
+            I build enterprise systems that stay <span class="bg-gradient-to-r from-sky-300 via-cyan-300 to-violet-300 bg-clip-text text-transparent">clear under complexity.</span>
+          </h1>
+          <p class="mt-6 max-w-2xl text-base leading-7 text-slate-400 sm:text-lg">
+            Technical lead and hands-on .NET developer across Oil &amp; Gas, Healthcare and Insurance. I work from requirements and solution design through code reviews, secure deployments, production support and stakeholder adoption.
+          </p>
+          <div class="mt-7 flex flex-wrap items-center gap-3 text-sm">
+            <span class="text-slate-500">Current focus:</span>
+            <span id="techFlipper" class="min-w-[150px] font-mono font-semibold text-sky-300" aria-live="polite">ASP.NET MVC</span>
+          </div>
+          <div class="mt-9 flex flex-wrap gap-3">
+            <a href="#projects" class="magnetic focus-ring rounded-xl bg-white px-5 py-3 text-sm font-semibold text-slate-950 hover:bg-sky-100">Explore enterprise work</a>
+            <a href="mailto:sreelatha.chinta2k23@gmail.com" class="magnetic focus-ring rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white hover:border-sky-300/30 hover:bg-sky-400/10">Email me</a>
+          </div>
+          <div class="mt-10 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
+            <div class="panel rounded-2xl p-4"><div class="text-2xl font-semibold text-white">15+</div><div class="mt-1 text-xs text-slate-500">Years in software delivery</div></div>
+            <div class="panel rounded-2xl p-4"><div class="text-2xl font-semibold text-white">18+</div><div class="mt-1 text-xs text-slate-500">Assets supported on Hub2</div></div>
+            <div class="panel rounded-2xl p-4"><div class="text-2xl font-semibold text-white">2,500+</div><div class="mt-1 text-xs text-slate-500">Hub2 project users</div></div>
+            <div class="panel rounded-2xl p-4"><div class="text-2xl font-semibold text-white">4</div><div class="mt-1 text-xs text-slate-500">Major awards recognized</div></div>
+          </div>
+        </div>
+
+        <div class="fade-up lg:justify-self-end">
+          <div class="glass overflow-hidden rounded-3xl shadow-2xl shadow-black/30 lg:w-[560px]">
+            <div class="flex items-center gap-2 border-b border-white/10 px-4 py-3">
+              <span class="h-3 w-3 rounded-full bg-rose-400/80"></span><span class="h-3 w-3 rounded-full bg-amber-300/80"></span><span class="h-3 w-3 rounded-full bg-emerald-400/80"></span>
+              <span class="ml-2 font-mono text-xs text-slate-500">Portfolio.cs — Visual Studio</span>
+            </div>
+            <div class="flex border-b border-white/10 bg-black/10 px-2 pt-2" role="tablist" aria-label="Code profile tabs">
+              <button class="code-tab focus-ring rounded-t-lg border border-transparent px-3 py-2 font-mono text-xs text-slate-500" role="tab" aria-selected="true" data-tab="profile">Profile.cs</button>
+              <button class="code-tab focus-ring rounded-t-lg border border-transparent px-3 py-2 font-mono text-xs text-slate-500" role="tab" aria-selected="false" data-tab="architecture">Architecture.cs</button>
+              <button class="code-tab focus-ring rounded-t-lg border border-transparent px-3 py-2 font-mono text-xs text-slate-500" role="tab" aria-selected="false" data-tab="ops">ProductionOps.cs</button>
+            </div>
+            <div class="min-h-[360px] p-5 sm:p-7">
+              <pre id="codePanel" class="overflow-x-auto whitespace-pre-wrap font-mono text-[12px] leading-6 sm:text-[13px]"><code><span class="syntax-key">public sealed class</span> <span class="syntax-type">Sreelatha</span> : <span class="syntax-type">TechnicalLead</span>
+{
+  <span class="syntax-key">public</span> <span class="syntax-type">string</span> Experience =&gt; <span class="syntax-str">"15+ years"</span>;
+  <span class="syntax-key">public</span> <span class="syntax-type">string[]</span> Domains =&gt;
+  [<span class="syntax-str">"Oil &amp; Gas"</span>, <span class="syntax-str">"Healthcare"</span>, <span class="syntax-str">"Insurance"</span>];
+
+  <span class="syntax-key">public</span> <span class="syntax-type">Stack</span> Build() =&gt; <span class="syntax-key">new</span>()
+  {
+    Backend = <span class="syntax-str">"C#, ASP.NET MVC, Web API, EF"</span>,
+    Frontend = <span class="syntax-str">"JS, TypeScript, Angular, Kendo UI"</span>,
+    Cloud = <span class="syntax-str">"Azure, Azure DevOps, Data Factory"</span>,
+    Data = <span class="syntax-str">"SQL Server, Oracle, PostgreSQL, MySQL"</span>
+  };
+
+  <span class="syntax-comment">// Own the path from requirement to reliable production.</span>
+}</code></pre>
+            </div>
+            <div class="border-t border-white/10 bg-black/20 px-5 py-4 font-mono text-xs text-slate-400">
+              <span class="text-emerald-300">✓</span> build succeeded &nbsp; <span class="text-slate-600">|</span> &nbsp; <span class="text-sky-300">0 critical issues</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="stack" class="py-24">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <div class="fade-up max-w-3xl">
+          <p class="font-mono text-xs uppercase tracking-[.2em] text-sky-300">01 / Capability Matrix</p>
+          <h2 class="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">A broad .NET foundation with enterprise depth.</h2>
+          <p class="mt-4 text-slate-400">The stack is grouped the way I use it in real delivery: product engineering, UI, cloud/data, databases, and operational tooling.</p>
+        </div>
+        <div class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <article class="fade-up panel rounded-2xl p-5">
+            <div class="mb-4 flex items-center justify-between"><h3 class="font-semibold text-white">Backend &amp; APIs</h3><span class="font-mono text-xs text-sky-300">core</span></div>
+            <div class="flex flex-wrap gap-2">
+              <span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">C#.NET</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">.NET Core</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">ASP.NET</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">ASP.NET MVC</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">Web API</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">WCF</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">Entity Framework</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">ADO.NET</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">LINQ</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">VB.NET</span>
+            </div>
+          </article>
+          <article class="fade-up panel rounded-2xl p-5">
+            <div class="mb-4 flex items-center justify-between"><h3 class="font-semibold text-white">Frontend</h3><span class="font-mono text-xs text-violet-300">ui</span></div>
+            <div class="flex flex-wrap gap-2">
+              <span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">JavaScript</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">TypeScript</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">Angular</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">jQuery</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">Kendo UI</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">Telerik</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">HTML</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">CSS</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">Bootstrap</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">WPF</span>
+            </div>
+          </article>
+          <article class="fade-up panel rounded-2xl p-5">
+            <div class="mb-4 flex items-center justify-between"><h3 class="font-semibold text-white">Cloud &amp; Data</h3><span class="font-mono text-xs text-cyan-300">azure</span></div>
+            <div class="flex flex-wrap gap-2">
+              <span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">Microsoft Azure</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">Azure DevOps</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">Azure Boards</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">CI/CD Pipelines</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">Data Factory</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">Databricks</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">Power BI</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">AWS</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">IAM</span>
+            </div>
+          </article>
+          <article class="fade-up panel rounded-2xl p-5">
+            <div class="mb-4 flex items-center justify-between"><h3 class="font-semibold text-white">Data &amp; Delivery</h3><span class="font-mono text-xs text-emerald-300">ops</span></div>
+            <div class="flex flex-wrap gap-2">
+              <span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">SQL Server</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">Oracle</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">PostgreSQL</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">MySQL</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">Git</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">ServiceNow</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">Jira</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">Agile</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">Scrum</span><span class="chip rounded-lg border border-white/10 bg-white/[.03] px-3 py-2 text-xs">Kanban</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="border-y border-white/5 bg-white/[.015] py-24">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <div class="fade-up flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+          <div class="max-w-3xl">
+            <p class="font-mono text-xs uppercase tracking-[.2em] text-sky-300">02 / Enterprise Work</p>
+            <h2 class="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">Projects built around real operational complexity.</h2>
+            <p class="mt-4 text-slate-400">These are client and enterprise systems, so source repositories and live environments are not public. The interface keeps those actions visible but correctly marks them as private/internal instead of inventing links.</p>
+          </div>
+          <div class="font-mono text-xs text-slate-500">Click “Deep dive” for architecture + responsibility details</div>
+        </div>
+        <div id="projectGrid" class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3"></div>
+      </div>
+    </section>
+
+    <section id="architecture" class="py-24">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <div class="fade-up max-w-3xl">
+          <p class="font-mono text-xs uppercase tracking-[.2em] text-sky-300">03 / Architecture Mindset</p>
+          <h2 class="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">A visual map of how I structure enterprise delivery.</h2>
+          <p class="mt-4 text-slate-400">The resume strongly supports layered MVC / MVPC application design, API integration, data lifecycle controls, secure cloud delivery, testability, release management and production support. The visualizer reflects those documented strengths without claiming patterns not listed in the resume.</p>
+        </div>
+
+        <div class="mt-10 grid gap-6 lg:grid-cols-[1.15fr_.85fr]">
+          <div class="fade-up glass rounded-3xl p-5 sm:p-7">
+            <div class="mb-5 flex items-center justify-between"><h3 class="font-semibold text-white">Enterprise delivery flow</h3><span class="font-mono text-xs text-slate-500">interactive map</span></div>
+            <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" id="archNodes">
+              <button class="arch-node focus-ring rounded-2xl border border-sky-300/20 bg-sky-400/5 p-4 text-left" data-title="Presentation" data-desc="Responsive web experiences built with ASP.NET MVC, JavaScript, jQuery, Kendo UI, Telerik, HTML, CSS and Bootstrap."><span class="font-mono text-xs text-sky-300">01</span><div class="mt-2 font-semibold text-white">Presentation</div><div class="mt-1 text-xs text-slate-500">MVC • Kendo • JS</div></button>
+              <button class="arch-node focus-ring rounded-2xl border border-violet-300/20 bg-violet-400/5 p-4 text-left" data-title="Application Services" data-desc="Business capabilities exposed through MVC controllers, Web API, WCF and reusable application services, with full-stack ownership from requirements to implementation."><span class="font-mono text-xs text-violet-300">02</span><div class="mt-2 font-semibold text-white">Application Services</div><div class="mt-1 text-xs text-slate-500">Web API • WCF</div></button>
+              <button class="arch-node focus-ring rounded-2xl border border-cyan-300/20 bg-cyan-400/5 p-4 text-left" data-title="Domain & Logic" data-desc="C#/.NET and LINQ based business logic, including rule-heavy insurance, healthcare workflows, portfolio modules and operations-readiness tooling."><span class="font-mono text-xs text-cyan-300">03</span><div class="mt-2 font-semibold text-white">Domain Logic</div><div class="mt-1 text-xs text-slate-500">C# • LINQ • Rules</div></button>
+              <button class="arch-node focus-ring rounded-2xl border border-emerald-300/20 bg-emerald-400/5 p-4 text-left" data-title="Persistence & Data" data-desc="Entity Framework, ADO.NET and relational databases including SQL Server, Oracle, PostgreSQL and MySQL, plus data integration, transformation and archival workflows."><span class="font-mono text-xs text-emerald-300">04</span><div class="mt-2 font-semibold text-white">Persistence & Data</div><div class="mt-1 text-xs text-slate-500">EF • SQL • Oracle</div></button>
+              <button class="arch-node focus-ring rounded-2xl border border-amber-300/20 bg-amber-400/5 p-4 text-left" data-title="Cloud & Delivery" data-desc="Azure, Azure DevOps, Azure Boards, CI/CD pipelines, Git/GitHub and release management for reliable deployments and lifecycle operations."><span class="font-mono text-xs text-amber-300">05</span><div class="mt-2 font-semibold text-white">Cloud & Delivery</div><div class="mt-1 text-xs text-slate-500">Azure • CI/CD</div></button>
+              <button class="arch-node focus-ring rounded-2xl border border-rose-300/20 bg-rose-400/5 p-4 text-left" data-title="Security & Support" data-desc="Vulnerability remediation at Azure and application layers, IAM, unit testing, L3 support, incident triage, RCA and high-availability focused operational support."><span class="font-mono text-xs text-rose-300">06</span><div class="mt-2 font-semibold text-white">Security & Support</div><div class="mt-1 text-xs text-slate-500">IAM • RCA • L3</div></button>
+            </div>
+          </div>
+          <aside class="fade-up panel rounded-3xl p-6">
+            <p class="font-mono text-xs text-slate-500">selected_node</p>
+            <h3 id="archTitle" class="mt-3 text-xl font-semibold text-white">Presentation</h3>
+            <p id="archDesc" class="mt-3 text-sm leading-6 text-slate-400">Responsive web experiences built with ASP.NET MVC, JavaScript, jQuery, Kendo UI, Telerik, HTML, CSS and Bootstrap.</p>
+            <div class="mt-6 rounded-2xl border border-white/10 bg-black/20 p-4 font-mono text-xs leading-6 text-slate-400">
+              <div><span class="text-sky-300">principle:</span> build for maintainability</div>
+              <div><span class="text-violet-300">quality:</span> unit testing + code reviews</div>
+              <div><span class="text-emerald-300">operations:</span> support what you ship</div>
+              <div><span class="text-amber-300">delivery:</span> CI/CD + release discipline</div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="border-y border-white/5 bg-white/[.015] py-24">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <div class="fade-up max-w-3xl">
+          <p class="font-mono text-xs uppercase tracking-[.2em] text-sky-300">04 / Professional Journey</p>
+          <h2 class="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">From software engineer to enterprise technical lead.</h2>
+          <p class="mt-4 text-slate-400">A career spanning hands-on development, architecture, validation, release management, SaaS operations, stakeholder leadership and mentoring.</p>
+        </div>
+        <div class="mt-12 max-w-4xl space-y-1" id="timeline">
+          <article class="timeline-line fade-up relative pl-12 pb-8">
+            <span class="absolute left-0 top-1 grid h-9 w-9 place-items-center rounded-full border border-sky-300/30 bg-sky-400/10 font-mono text-xs text-sky-300">01</span>
+            <button class="exp-toggle focus-ring w-full rounded-2xl border border-white/10 bg-white/[.025] p-5 text-left" aria-expanded="true">
+              <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"><div><h3 class="font-semibold text-white">Associate Consultant • CGI Information Systems Pvt Ltd</h3><p class="mt-1 text-sm text-slate-500">January 2020 — Present</p></div><span class="text-xs text-sky-300">ORC • Hub2 • PROACT • SaaS L3</span></div>
+              <div class="exp-details mt-4 grid gap-2 text-sm leading-6 text-slate-400"><p>Technical lead and original developer of ORC, owning requirements, solution design, development, code reviews, major deployments, unit testing and security remediation.</p><p>Foundational SME for GoTechnology / Hub2, coordinating 18+ assets and around 2,500+ project users across regions, while leading migrations, archival, divestment and lifecycle processes.</p><p>Delivered ProAct full-stack work and portfolio capabilities, while supporting OPEX Estimation and Lucid Chart/WEFS SaaS platforms.</p></div>
+            </button>
+          </article>
+          <article class="timeline-line fade-up relative pl-12 pb-8">
+            <span class="absolute left-0 top-1 grid h-9 w-9 place-items-center rounded-full border border-violet-300/30 bg-violet-400/10 font-mono text-xs text-violet-300">02</span>
+            <button class="exp-toggle focus-ring w-full rounded-2xl border border-white/10 bg-white/[.025] p-5 text-left" aria-expanded="false">
+              <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"><div><h3 class="font-semibold text-white">Senior Software Engineer • DXC Technology (formerly HPE)</h3><p class="mt-1 text-sm text-slate-500">February 2016 — January 2020</p></div><span class="text-xs text-violet-300">HLS • Healthcare</span></div>
+              <div class="exp-details mt-4 hidden grid gap-2 text-sm leading-6 text-slate-400"><p>Technical Owner, Technical Architect and Senior Developer for a next-generation pharma payer platform.</p><p>Worked across Web API, MVC 5, Entity Framework 6, Kendo UI, WCF, LINQ and SSRS while participating in backlog grooming, sprint planning and full lifecycle delivery.</p><p>Led Computer System Validation activities and handled incidents across severity levels.</p></div>
+            </button>
+          </article>
+          <article class="timeline-line fade-up relative pl-12 pb-2">
+            <span class="absolute left-0 top-1 grid h-9 w-9 place-items-center rounded-full border border-emerald-300/30 bg-emerald-400/10 font-mono text-xs text-emerald-300">03</span>
+            <button class="exp-toggle focus-ring w-full rounded-2xl border border-white/10 bg-white/[.025] p-5 text-left" aria-expanded="false">
+              <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"><div><h3 class="font-semibold text-white">Software Engineer • CGI Information Systems Pvt Ltd</h3><p class="mt-1 text-sm text-slate-500">July 2010 — January 2016</p></div><span class="text-xs text-emerald-300">eCareLogic • Ratabase • EDGE</span></div>
+              <div class="exp-details mt-4 hidden grid gap-2 text-sm leading-6 text-slate-400"><p>Developed and designed healthcare and insurance systems using ASP.NET, VB.NET, C#.NET, WCF, WPF, SQL Server, Oracle and TFS/Subversion.</p><p>Worked as senior developer and solution designer on eCareLogic, including Web Letters and Core Pathways.</p><p>Supported Ratabase 7.0 release implementation and contributed to the EDGE insurance platform across design, coding, reviews, testing support and documentation.</p></div>
+            </button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <div class="grid gap-6 lg:grid-cols-2">
+          <article class="fade-up glass rounded-3xl p-6 sm:p-8">
+            <p class="font-mono text-xs uppercase tracking-[.2em] text-amber-300">Recognition</p>
+            <h2 class="mt-3 text-2xl font-semibold text-white">Awards that reflect delivery and leadership.</h2>
+            <div class="mt-6 grid gap-3 sm:grid-cols-2">
+              <div class="rounded-2xl border border-white/10 bg-white/[.025] p-4"><div class="text-sm font-semibold text-white">VP-CIO Award</div><div class="mt-1 text-xs text-slate-500">Client: Shell</div></div>
+              <div class="rounded-2xl border border-white/10 bg-white/[.025] p-4"><div class="text-sm font-semibold text-white">Bronze Award</div><div class="mt-1 text-xs text-slate-500">CGI</div></div>
+              <div class="rounded-2xl border border-white/10 bg-white/[.025] p-4"><div class="text-sm font-semibold text-white">Pat on Back</div><div class="mt-1 text-xs text-slate-500">CGI • contribution &amp; mentoring</div></div>
+              <div class="rounded-2xl border border-white/10 bg-white/[.025] p-4"><div class="text-sm font-semibold text-white">Partnership First</div><div class="mt-1 text-xs text-slate-500">DXC Technology • release activities</div></div>
+            </div>
+          </article>
+          <article class="fade-up panel rounded-3xl p-6 sm:p-8">
+            <p class="font-mono text-xs uppercase tracking-[.2em] text-emerald-300">Beyond Code</p>
+            <h2 class="mt-3 text-2xl font-semibold text-white">Adoption, governance and knowledge transfer.</h2>
+            <p class="mt-4 text-sm leading-6 text-slate-400">I build the operating model around the software too: ServiceNow catalogues, process documentation, SharePoint and knowledge repositories, training videos, demos, drop-in sessions, user workshops, vendor sync-ups and mentoring for junior team members.</p>
+            <div class="mt-6 border-l border-emerald-300/20 pl-4 text-sm text-slate-400">Education: <span class="text-slate-200">Master of Computer Applications (MCA), 2008</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="pb-24 pt-4">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <div class="fade-up overflow-hidden rounded-[2rem] border border-sky-300/15 bg-gradient-to-br from-sky-400/10 via-violet-400/5 to-transparent p-6 shadow-glow sm:p-10 lg:p-12">
+          <div class="grid gap-10 lg:grid-cols-[.9fr_1.1fr]">
+            <div>
+              <p class="font-mono text-xs uppercase tracking-[.2em] text-sky-300">05 / Connect</p>
+              <h2 class="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">Let’s talk about enterprise .NET, Azure and technical leadership.</h2>
+              <p class="mt-4 max-w-xl text-slate-400">For roles or collaborations involving product engineering, modernization, technical ownership, SaaS support or cloud-enabled delivery, reach out directly.</p>
+              <div class="mt-7 space-y-3 text-sm">
+                <a class="focus-ring flex items-center gap-3 rounded-xl border border-white/10 bg-black/20 px-4 py-3 hover:border-sky-300/25" href="mailto:sreelatha.chinta2k23@gmail.com"><span class="font-mono text-sky-300">email</span><span>sreelatha.chinta2k23@gmail.com</span></a>
+                <a class="focus-ring flex items-center gap-3 rounded-xl border border-white/10 bg-black/20 px-4 py-3 hover:border-sky-300/25" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/sreelatha-suragani-605076247"><span class="font-mono text-sky-300">linkedin</span><span>linkedin.com/in/sreelatha-suragani-605076247</span></a>
+                <div class="flex items-center gap-3 rounded-xl border border-white/10 bg-black/20 px-4 py-3"><span class="font-mono text-sky-300">phone</span><span>+91 9916833360</span></div>
+              </div>
+            </div>
+            <form id="contactForm" class="grid gap-4" aria-label="Contact form">
+              <label class="text-sm text-slate-300">Name<input required name="name" class="focus-ring mt-2 w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-white placeholder:text-slate-600" placeholder="Your name" /></label>
+              <label class="text-sm text-slate-300">Email<input required type="email" name="email" class="focus-ring mt-2 w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-white placeholder:text-slate-600" placeholder="you@example.com" /></label>
+              <label class="text-sm text-slate-300">Message<textarea required name="message" rows="5" class="focus-ring mt-2 w-full resize-none rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-white placeholder:text-slate-600" placeholder="Tell me about the role, project or challenge..."></textarea></label>
+              <button class="magnetic focus-ring rounded-xl bg-white px-5 py-3 text-sm font-semibold text-slate-950 hover:bg-sky-100" type="submit">Open in email client</button>
+              <p class="text-xs text-slate-500">This static portfolio does not collect or store form data. Submitting opens your email client.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-white/5 py-8">
+    <div class="mx-auto flex max-w-7xl flex-col gap-3 px-5 text-xs text-slate-600 sm:flex-row sm:items-center sm:justify-between lg:px-8">
+      <p>© <span id="year"></span> Sreelatha Suragani. Built as a static, host-anywhere portfolio.</p>
+      <p class="font-mono">HTML5 • Tailwind CDN • Vanilla JS</p>
+    </div>
+  </footer>
+
+  <dialog id="projectModal" class="w-[min(760px,calc(100%-2rem))] rounded-3xl border border-white/10 bg-[#0b111e] p-0 text-slate-200 shadow-2xl backdrop:bg-black/75">
+    <div class="p-6 sm:p-8">
+      <div class="flex items-start justify-between gap-4"><div><p id="modalMeta" class="font-mono text-xs text-sky-300"></p><h3 id="modalTitle" class="mt-2 text-2xl font-semibold text-white"></h3></div><button id="closeModal" class="focus-ring rounded-lg border border-white/10 p-2 text-slate-400 hover:text-white" aria-label="Close project details">✕</button></div>
+      <p id="modalSummary" class="mt-5 text-sm leading-6 text-slate-400"></p>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2"><div class="rounded-2xl border border-white/10 bg-white/[.025] p-4"><h4 class="text-sm font-semibold text-white">Architecture &amp; stack</h4><p id="modalArch" class="mt-2 text-sm leading-6 text-slate-400"></p></div><div class="rounded-2xl border border-white/10 bg-white/[.025] p-4"><h4 class="text-sm font-semibold text-white">Ownership &amp; impact</h4><p id="modalImpact" class="mt-2 text-sm leading-6 text-slate-400"></p></div></div>
+      <div class="mt-6 flex flex-wrap gap-2" id="modalBadges"></div>
+    </div>
+  </dialog>
+
+  <script>
+    const $ = (s, ctx=document) => ctx.querySelector(s);
+    const $$ = (s, ctx=document) => [...ctx.querySelectorAll(s)];
+
+    // Mobile nav
+    const menuBtn = $('#menuBtn');
+    const mobileNav = $('#mobileNav');
+    menuBtn?.addEventListener('click', () => {
+      const open = menuBtn.getAttribute('aria-expanded') === 'true';
+      menuBtn.setAttribute('aria-expanded', String(!open));
+      mobileNav.classList.toggle('hidden');
+    });
+    $$('#mobileNav a').forEach(a => a.addEventListener('click', () => mobileNav.classList.add('hidden')));
+
+    // Tech flipper
+    const techs = ['ASP.NET MVC', 'C#.NET', 'Web API', 'Azure', 'Entity Framework', 'SQL Server', 'Azure DevOps', 'Data Engineering'];
+    let techIndex = 0;
+    setInterval(() => {
+      const el = $('#techFlipper');
+      if (!el) return;
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(6px)';
+      setTimeout(() => {
+        techIndex = (techIndex + 1) % techs.length;
+        el.textContent = techs[techIndex];
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      }, 180);
+    }, 2200);
+    $('#techFlipper').style.transition = 'opacity .18s ease, transform .18s ease';
+
+    // Code tabs
+    const codeContent = {
+      profile: `<code><span class="syntax-key">public sealed class</span> <span class="syntax-type">Sreelatha</span> : <span class="syntax-type">TechnicalLead</span>\n{\n  <span class="syntax-key">public</span> <span class="syntax-type">string</span> Experience =&gt; <span class="syntax-str">"15+ years"</span>;\n  <span class="syntax-key">public</span> <span class="syntax-type">string[]</span> Domains =&gt;\n  [<span class="syntax-str">"Oil &amp; Gas"</span>, <span class="syntax-str">"Healthcare"</span>, <span class="syntax-str">"Insurance"</span>];\n\n  <span class="syntax-key">public</span> <span class="syntax-type">Stack</span> Build() =&gt; <span class="syntax-key">new</span>()\n  {\n    Backend = <span class="syntax-str">"C#, ASP.NET MVC, Web API, EF"</span>,\n    Frontend = <span class="syntax-str">"JS, TypeScript, Angular, Kendo UI"</span>,\n    Cloud = <span class="syntax-str">"Azure, Azure DevOps, Data Factory"</span>,\n    Data = <span class="syntax-str">"SQL Server, Oracle, PostgreSQL, MySQL"</span>\n  };\n\n  <span class="syntax-comment">// Own the path from requirement to reliable production.</span>\n}</code>`,
+      architecture: `<code><span class="syntax-key">public</span> <span class="syntax-type">Solution</span> Design(<span class="syntax-type">Requirement</span> req)\n{\n  <span class="syntax-key">var</span> ui = BuildResponsiveExperience(req);\n  <span class="syntax-key">var</span> api = IntegrateServices(WebApi, Wcf);\n  <span class="syntax-key">var</span> data = Persist(EntityFramework, SqlServer);\n\n  ValidateWithUnitTests();\n  SecureWith(IAM, VulnerabilityRemediation);\n  DeliverVia(AzureDevOps, Git, CiCd);\n\n  <span class="syntax-key">return</span> OperateWith(L3Support, RCA, Documentation);\n}</code>`,
+      ops: `<code><span class="syntax-comment">// Production ownership is part of engineering.</span>\n<span class="syntax-key">while</span> (platform.IsLive)\n{\n  TriageIncidents();\n  AnalyzeRootCause();\n  PatchVulnerabilities();\n  ImproveUnitCoverage();\n  GovernDataLifecycle();\n  UpdateKnowledgeBase();\n  EnableUsersWithTraining();\n}\n\n<span class="syntax-comment">// ORC • Hub2 • OPEX • Lucid Chart / WEFS</span></code>`
+    };
+    $$('.code-tab').forEach(tab => tab.addEventListener('click', () => {
+      $$('.code-tab').forEach(t => t.setAttribute('aria-selected','false'));
+      tab.setAttribute('aria-selected','true');
+      $('#codePanel').innerHTML = codeContent[tab.dataset.tab];
+    }));
+
+    // Fade-in observer
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('in-view'); observer.unobserve(entry.target); }
+    }), { threshold: .12 });
+    $$('.fade-up').forEach(el => observer.observe(el));
+
+    // Magnetic buttons
+    $$('.magnetic').forEach(el => {
+      el.addEventListener('mousemove', e => {
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left - r.width/2) * .12;
+        const y = (e.clientY - r.top - r.height/2) * .12;
+        el.style.transform = `translate(${x}px, ${y}px)`;
+      });
+      el.addEventListener('mouseleave', () => el.style.transform = 'translate(0,0)');
+    });
+
+    const projects = [
+      {
+        title:'ORC — OR & CSU Tool', meta:'Shell • Dec 2021 — Present',
+        summary:'Strategic enterprise platform that unifies operational tools and modules including DDP, SOF, SURU, P2A, Assurance and eSOF, while centralizing change management and information cascading.',
+        stack:['ASP.NET MVC','Entity Framework','C#','SQL Server','Azure','jQuery','Azure DevOps','Git/GitHub'],
+        arch:'Layered ASP.NET MVC enterprise application with Entity Framework persistence, SQL Server, Azure-hosted delivery, client-side jQuery/Bootstrap UI and Azure DevOps/Git based release workflow.',
+        impact:'Original scratch developer and technical lead with end-to-end accountability across requirements, solution design, development, code reviews, deployment, DDP module delivery, unit testing, security remediation, demos and L3 support.'
+      },
+      {
+        title:'GoTechnology / Hub2', meta:'Shell • Dec 2021 — Present',
+        summary:'Configurable web-based Completions Management System for construction, commissioning, decommissioning and divestment workflows, with real-time reporting and offline-capable mobile support.',
+        stack:['SME','SQL Server','Azure','AWS','Data Archival','ServiceNow','Vendor Management'],
+        arch:'SaaS operations and data-lifecycle architecture centered on governed onboarding/offboarding, migration, archival to Azure Blob Storage, retention controls, vendor integration and standardized ServiceNow workflows.',
+        impact:'Foundational SME supporting 18+ assets and around 2,500+ users. Led project lifecycle processes, migrations, archival, divestment and stale-asset retirement, plus documentation, user statistics automation, regional sessions and vendor sync-ups.'
+      },
+      {
+        title:'PROACT', meta:'Shell • Feb 2020 — Nov 2021',
+        summary:'Interactive project and portfolio performance visualization platform integrating multiple data sources, webforms and Power BI analytics for real-time project health insights.',
+        stack:['ASP.NET MVC','Entity Framework','C#','SQL Server','Azure','Bootstrap','jQuery','Power BI'],
+        arch:'Full-stack MVC solution integrating structured project data with responsive web UI and Power BI, supported by Azure-hosted application services and relational persistence.',
+        impact:'Owned requirements, client interaction, frontend/backend development, testing and production deployment. Led the Portfolio Module and EMoc data integration, plus responsive UI and incident management.'
+      },
+      {
+        title:'HLS — Health & Life Science', meta:'DXC Technology • Feb 2016 — Jan 2020',
+        summary:'Next-generation pharma payer platform covering Provider Management, Provider Portal, Prior Authorization and Managed Care across web and mobile experiences.',
+        stack:['MVC 5','Web API','EF6','JavaScript','jQuery','Kendo UI','WCF','LINQ','SSRS'],
+        arch:'Service-oriented .NET application using MVC 5, Web API and WCF, Entity Framework 6 for data access, Kendo UI for rich frontend interaction and SSRS for reporting.',
+        impact:'Technical Owner, Technical Architect and Senior Developer. Delivered full-stack features, unit testing, documentation, agile planning and Computer System Validation across the end-to-end lifecycle.'
+      },
+      {
+        title:'eCareLogic', meta:'CGI • May 2014 — Jan 2016',
+        summary:'Modular Electronic Patient Record platform designed to integrate legacy hospital data and support patient pathways across hospitals, GP practices and polyclinics.',
+        stack:['.NET Framework 4.5.1','ASP.NET','VB.NET','WCF','JavaScript','jQuery','SQL Server','TFS'],
+        arch:'Modular ASP.NET healthcare platform integrating legacy data through service interfaces, SQL Server persistence and reusable web modules.',
+        impact:'Senior Developer and Solution Designer. Built Web Letters and Core Pathways, authored elicitation/LLD/UTS documentation and handled incidents across severity levels.'
+      },
+      {
+        title:'Ratabase Product Builder', meta:'CGI • Jun 2012 — Apr 2014',
+        summary:'Windows-based insurance rate and business-rule authoring system for managing rate tables, formulas, reports and test rating scenarios before production deployment.',
+        stack:['.NET Framework 3.5','C#.NET','WPF','XSLT','CAB Framework','Subversion'],
+        arch:'Desktop WPF product-builder architecture using C#.NET, CAB framework and XSLT-driven transformation for configurable insurance rating artifacts.',
+        impact:'Delivered solution design, HLD/LLD, unit testing and documentation. Spearheaded the Ratabase 7.0 release implementation and new product enhancements.'
+      },
+      {
+        title:'EDGE Insurance Platform', meta:'CGI • Jul 2010 — Jun 2012',
+        summary:'Insurance management platform covering quoting, underwriting, claims, billing and regulatory reporting, with configurable rules and .NET APIs for external integrations.',
+        stack:['.NET Framework 3.5','C#.NET','VB.NET','WPF','MVPC','SQL Server','Oracle','TFS'],
+        arch:'Configurable insurance platform using .NET APIs, MVPC-style client architecture, SQL Server/Oracle persistence and integration interfaces for agency and legacy systems.',
+        impact:'Worked across requirements, technical analysis, full-stack development, unit testing, code review, documentation, QA support and production incident resolution.'
+      }
+    ];
+
+    const grid = $('#projectGrid');
+    projects.forEach((p, i) => {
+      const card = document.createElement('article');
+      card.className = 'project-card fade-up panel rounded-3xl p-6';
+      card.innerHTML = `<div class="relative z-10"><div class="flex items-start justify-between gap-3"><div><p class="font-mono text-[11px] uppercase tracking-[.16em] text-sky-300">${p.meta}</p><h3 class="mt-2 text-xl font-semibold text-white">${p.title}</h3></div><span class="rounded-lg border border-white/10 bg-black/20 px-2 py-1 font-mono text-[10px] text-slate-500">0${i+1}</span></div><p class="mt-4 line-clamp-4 text-sm leading-6 text-slate-400">${p.summary}</p><div class="mt-5 flex flex-wrap gap-2">${p.stack.slice(0,4).map(s=>`<span class="rounded-md border border-white/10 bg-white/[.03] px-2 py-1 text-[11px] text-slate-400">${s}</span>`).join('')}</div><div class="mt-6 flex flex-wrap gap-2"><button class="deep-dive focus-ring rounded-xl bg-white px-3.5 py-2 text-xs font-semibold text-slate-950" data-index="${i}">Deep dive</button><span class="rounded-xl border border-white/10 px-3.5 py-2 text-xs text-slate-500" title="Client source code is private">Private repo</span><span class="rounded-xl border border-white/10 px-3.5 py-2 text-xs text-slate-500" title="Enterprise environment is not publicly accessible">Internal deployment</span></div></div>`;
+      grid.appendChild(card);
+      observer.observe(card);
+    });
+
+    const modal = $('#projectModal');
+    grid.addEventListener('click', e => {
+      const btn = e.target.closest('.deep-dive');
+      if (!btn) return;
+      const p = projects[Number(btn.dataset.index)];
+      $('#modalMeta').textContent = p.meta;
+      $('#modalTitle').textContent = p.title;
+      $('#modalSummary').textContent = p.summary;
+      $('#modalArch').textContent = p.arch;
+      $('#modalImpact').textContent = p.impact;
+      $('#modalBadges').innerHTML = p.stack.map(s=>`<span class="rounded-lg border border-sky-300/15 bg-sky-400/5 px-2.5 py-1.5 text-[11px] text-sky-200">${s}</span>`).join('');
+      modal.showModal();
+    });
+    $('#closeModal').addEventListener('click', () => modal.close());
+    modal.addEventListener('click', e => { if (e.target === modal) modal.close(); });
+
+    // Architecture map
+    $$('.arch-node').forEach(node => node.addEventListener('click', () => {
+      $('#archTitle').textContent = node.dataset.title;
+      $('#archDesc').textContent = node.dataset.desc;
+      $$('.arch-node').forEach(n => n.classList.remove('ring-1','ring-sky-300/50'));
+      node.classList.add('ring-1','ring-sky-300/50');
+    }));
+
+    // Experience accordion
+    $$('.exp-toggle').forEach(btn => btn.addEventListener('click', () => {
+      const detail = $('.exp-details', btn);
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      detail.classList.toggle('hidden');
+    }));
+
+    // Contact mailto fallback for static hosting
+    $('#contactForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const fd = new FormData(e.currentTarget);
+      const subject = encodeURIComponent(`Portfolio enquiry from ${fd.get('name')}`);
+      const body = encodeURIComponent(`Name: ${fd.get('name')}\nEmail: ${fd.get('email')}\n\n${fd.get('message')}`);
+      window.location.href = `mailto:sreelatha.chinta2k23@gmail.com?subject=${subject}&body=${body}`;
+    });
+
+    // Canvas particles
+    const canvas = $('#particleCanvas');
+    const ctx = canvas.getContext('2d');
+    let points = [];
+    function resizeCanvas(){
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = innerWidth * dpr; canvas.height = innerHeight * dpr;
+      canvas.style.width = innerWidth+'px'; canvas.style.height = innerHeight+'px';
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      const count = Math.min(70, Math.max(28, Math.floor(innerWidth/24)));
+      points = Array.from({length:count}, () => ({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18,r:Math.random()*1.4+.4}));
+    }
+    function drawParticles(){
+      ctx.clearRect(0,0,innerWidth,innerHeight);
+      for (const p of points){
+        p.x += p.vx; p.y += p.vy;
+        if (p.x<0||p.x>innerWidth) p.vx*=-1; if (p.y<0||p.y>innerHeight) p.vy*=-1;
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle='rgba(125,211,252,.35)'; ctx.fill();
+      }
+      for (let i=0;i<points.length;i++) for (let j=i+1;j<points.length;j++) {
+        const a=points[i], b=points[j], dx=a.x-b.x, dy=a.y-b.y, dist=Math.hypot(dx,dy);
+        if(dist<115){ ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.strokeStyle=`rgba(125,211,252,${.055*(1-dist/115)})`; ctx.stroke(); }
+      }
+      requestAnimationFrame(drawParticles);
+    }
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) { resizeCanvas(); drawParticles(); addEventListener('resize', resizeCanvas); }
+
+    $('#year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
